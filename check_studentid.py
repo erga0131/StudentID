@@ -15,6 +15,8 @@ amari = sum % 11
 
 if amari == 1:
     num = 0
+elif amari == 0:
+    num = 1
 else:
     num = int(11 - amari[0,0])
 

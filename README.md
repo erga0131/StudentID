@@ -1,6 +1,12 @@
 # StudentID
 某大学の学籍番号に関するウワサを検証するリポジトリ
 
+## index.html
+### 概要
+付番規則に沿った学籍番号を生成するウェブページ。学部・入学年・4から7桁目をすべて指定するとチェックデジットを計算してそれが正しい学籍番号かわかる。
+### 実行
+[https://erga0131.github.io/StudentID/](https://erga0131.github.io/StudentID/)
+
 ## check_studentid.py
 ### 概要
 学籍番号の上7桁を入力した時、最後の1桁を計算するスクリプト。 

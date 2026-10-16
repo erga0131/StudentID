@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学籍番号ジェネレータ</title>
+</head>
+<body>
+    <table>
+      <tr>
+        <th>学部</th>
+        <td>
+          <select id="faculty">
+            <option value="1">1:文学部</option>
+            <option value="2">2:経済学部</option>
+            <option value="3">3:法学部</option>
+            <option value="4">4:商学部</option>
+            <option value="5">5:薬学部</option>
+            <option value="6">6:理工学部</option>
+            <option value="7">7:SFC（総合政策学部/環境情報学部）</option>
+            <option value="8">8:研究科（大学院）</option>
+            <option value="9">9:別科</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>入学年度</th>
+          <td>
+            <input id="year" type="number" value="26">
+          </td>
+      </tr>
+      <tr>
+        <th>4~7桁目</th>
+          <td>
+            <input id="fourtoseven" type="number" placeholder="未入力の場合ランダム生成" max="9999"
+  oninput="javascript: this.value = this.value.slice(0, 4);">
+          </td>
+      </tr>
+      <tr>
+        <td>
+          <button id="button">選択完了</button>
+        </td>
+      </tr>
+    </table>
+      <p id="result"></p>
+    <script>
+      document.getElementById('button').addEventListener('click', () => {
+        const faculty = document.getElementById("faculty").selectedIndex + 1;
+        const year = document.getElementById("year").value;
+        let input427 = document.getElementById("fourtoseven").value
+        if (input427 === "") {
+          fourtoseven = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+        } else {
+          fourtoseven = input427.padStart(4, '0');
+        }
+        const id7 = `${faculty}${year}${fourtoseven}`;
+        const weight = [2, 3, 4, 5, 6, 7, 8];
+
+        const dot = Array.from(id7, Number).reduce((sum, num, index) => {
+          return sum + (num * weight[index]);
+        }, 0);
+
+        let d8 = dot % 11
+        let checkdigit = 0
+
+        if (d8 === 1) {
+          checkdigit = 0
+        } else if (d8 === 0){
+          checkdigit = 1
+        } else {
+          checkdigit = 11 - d8
+        }
+
+
+        document.getElementById("result").innerText =　`${faculty}${year}${fourtoseven}${checkdigit}`;
+      });
+    </script>
+  </body>
+</html>
